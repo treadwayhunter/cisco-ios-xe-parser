@@ -1,0 +1,25 @@
+{
+  "name": "cisco-ios-xe",
+  "displayName": "Cisco IOS-XE",
+  "description": "Highlights for Cisco IOS-XE configs.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "cisco-iosxe",
+      "aliases": ["Cisco IOS-XE", "cisco-iosxe"],
+      "extensions": [".ios",".iosxe"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "cisco-iosxe",
+      "scopeName": "source.cisco-iosxe",
+      "path": "./syntaxes/cisco-iosxe.tmLanguage.json"
+    }]
+  }
+}
