@@ -3,40 +3,99 @@
 	"name": "Cisco IOS-XE",
 	"patterns": [
 		{
-			"include": "#keywords"
-		},
-		{
 			"include": "#strings"
 		},
 		{
 			"include": "#comments"
 		},
 		{
-			"include": "#constants"
-		},
-		{
-			"include": "#variables"
-		},
-		{
-			"include": "#routerProcess"
+			"include": "#router"
 		},
 		{
 			"include": "#negate"
+		},
+		{
+			"include": "#interfaces"
+		},
+		{
+			"include": "#lines"
 		}
 	],
 	"repository": {
-		"negate": {
-			"match": "\\s*no",
-			"name": "string.regexp.negate.cisco-iosxe"
+		"lines": {
+			"patterns": [
+				{
+					"match": "(?i)(^line\\s+vty)(\\s+[0-9]{1,2}\\s+[0-9]{1,2})",
+					"captures": {
+						"1": {"name": "keyword.other"},
+						"2": {"name": "entity.name.class"}
+					}
+				},
+				{
+					"match": "(?i)(^line (?:con|aux))\\s+([0-9])",
+					"captures": {
+						"1": {"name": "keyword.other"},
+						"2": {"name": "entity.name.class"}
+					}
+				},
+				{
+					"match": "^line",
+					"name": "keyword.other"
+				}
+			]
 		},
-		"routerProcess": {
+		"interfaces": {
+			"patterns": [
+				{
+					"match": "(?i)g(?:i){0,1}[0-9](/[0-9]{1,2}){0,2}(-[0-9]{1,2}){0,1}",
+					"name": "entity.name.class.interfaces.gigabit-ethernet.cisco-iosxe"
+				},
+				{
+					"match": "(?i)gigabitEthernet[0-9](/[0-9]{1,2}){0,2}(-[0-9]{1,2}){0,1}",
+					"name": "entity.name.class.interfaces.gigabit-ethernet.cisco-iosxe"
+				},
+				{
+					"match": "(?i)\\bint(?:er(?:f(?:a(?:c(?:e)?)?)?)?)?\\b",
+					"name": "keyword.other.interfaces.cisco-iosxe"
+				},
+				{
+					"match": "ran(?:g(?:e)?)?",
+					"name": "entity.name.class.interfaces.range.cisco-iosxe"
+				},
+				{
+					"match": "(?i)switchport",
+					"name": "variable.other.interfaces.switchport.cisco-iosxe"
+				},
+				{
+					"match": "\\b(?i)access\\b(?!-)",
+					"name": "constant.numeric"
+				},
+				{
+					"match": "\\btrunk\\b",
+					"name": "constant.character.escape"
+				}
+			]
+		},
+		"negate": {
+			"patterns": [
+				{
+					"match": "\\s*no",
+					"name": "string.regexp.negate.no.cisco-iosxe"
+				},
+				{
+					"match": "^default",
+					"name": "string.regexp.negate.default.cisco-iosxe"
+				}
+			]
+		},
+		"router": {
 			"patterns": [
 				{
 					"match": "(^router)\\s+(rip|ospf|eigrp|bgp)\\s+([0-9]{1,10})",
 					"captures": {
 						"1": { "name": "keyword.other.router.cisco-iosxe"},
 						"2": { "name": "keyword.other.router.protocol.cisco-iosxe"},
-						"3": { "name": "variable.other.router.as.cisco-iosxe"}
+						"3": { "name": "entity.name.class.router.as.cisco-iosxe"}
 					}
 				},
 				{
@@ -57,12 +116,6 @@
 				}
 
 			]
-		},
-		"keywords": {
-
-		},
-		"variables": {
-	
 		},
 		"strings": {
 			"name": "string.quoted.double.cisco-iosxe",
