@@ -16,26 +16,53 @@
 		},
 		{
 			"include": "#variables"
+		},
+		{
+			"include": "#routerProcess"
+		},
+		{
+			"include": "#negate"
 		}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.cisco-iosxe",
-				"match": "\\b(^interface|^router)\\b"
-			}]
+		"negate": {
+			"match": "\\s*no",
+			"name": "string.regexp.negate.cisco-iosxe"
 		},
-		"variables": {
+		"routerProcess": {
 			"patterns": [
 				{
-					"name": "variable.name.interface.cisco-iosxe",
-					"match": "\\bGigabitEthernet0\\b"
+					"match": "(^router)\\s+(rip|ospf|eigrp|bgp)\\s+([0-9]{1,10})",
+					"captures": {
+						"1": { "name": "keyword.other.router.cisco-iosxe"},
+						"2": { "name": "keyword.other.router.protocol.cisco-iosxe"},
+						"3": { "name": "variable.other.router.as.cisco-iosxe"}
+					}
 				},
 				{
-					"name": "variable.name.ospf.cisco-iosxe",
-					"match": "\\bospf\\b"
+					"match": "(^router)\\s+(rip|ospf|eigrp|bgp)",
+					"captures": {
+						"1": { "name": "keyword.other.router.cisco-iosxe"},
+						"2": { "name": "keyword.other.router.protocol.cisco-iosxe"}
+					}
+				},
+	
+				{
+					"match": "^router",
+					"name": "keyword.other.router.cisco-iosxe"
+				},
+				{
+					"match": "passive-interface",
+					"name": "variable.other.router.passive-interface.cisco-iosxe"
 				}
+
 			]
+		},
+		"keywords": {
+
+		},
+		"variables": {
+	
 		},
 		"strings": {
 			"name": "string.quoted.double.cisco-iosxe",
