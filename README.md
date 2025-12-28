@@ -1,16 +1,14 @@
 # cisco-ios-xe README
 
-This is the README for your extension "cisco-ios-xe". After writing up a brief description, we recommend including the following sections.
+A VSCode extension and text parser for Cisco IOS-XE config files.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Highlights configurations across the config file.
+Config file must use the .ios and .iosxe extensions.
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Cisco allows for a lot of "half-written" keywords in its syntax. I have not attempted to cover each possible value, but rather just the common canonical forms of a keyword.
+For example, int, inte, inter, interf, interfa, interfac, and interface will all allow you to access an interface. However, this parser will only highlight int and interface.
 
 ## Requirements
 
