@@ -86,12 +86,32 @@
 					"name": "entity.name.class.interfaces.ethernet.cisco-iosxe"
 				},
 				{
-					"match": "^\\b(int|interface)\\b",
+					"match": "\\b(int|interface)\\b",
 					"name": "keyword.other.interfaces.interface.cisco-iosxe"
 				},
 				{
 					"match": "\\b(ran|range)\\b",
 					"name": "constant.character.escape"
+				},
+				{
+					"match": "\\baccess(?!-)\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\bvoice\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\btrunk\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "\\bswitchport\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\baccess-session\\b",
+					"name": "keyword.control"
 				}
 			]
 		},
