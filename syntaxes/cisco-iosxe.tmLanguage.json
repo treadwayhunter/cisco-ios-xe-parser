@@ -15,7 +15,7 @@
 			"include": "#router"
 		},
 		{
-			"include": "#negate"
+			"include": "#critical"
 		},
 		{
 			"include": "#interfaces"
@@ -28,6 +28,9 @@
 		},
 		{
 			"include": "#accessLists"
+		},
+		{
+			"include": "#policyEnforcement"
 		}
 	],
 	"repository": {
@@ -36,6 +39,101 @@
 				{
 					"match": "\\b(?:(?:25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})\\.){3}(?:25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})\\b",
 					"name": "entity.name.class"
+				},
+				{
+					"match": "address\\s+ipv4",
+					"name": "variable.other"
+				}
+			]
+		},
+		"policyEnforcement": {
+			"patterns": [
+				{
+					"match": "^\\baaa new-model\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "^\\baaa\\s+authentication\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "^\\b(aaa)\\s+(authorization)\\b",
+					"captures": {
+						"1": {
+							"name": "keyword.control"
+						},
+						"2": {
+							"name": "keyword.other"
+						}
+					}
+				},
+				{
+					"match": "^\\b(aaa)\\s+(accounting)\\b",
+					"captures": {
+						"1": {
+							"name": "keyword.control"
+						},
+						"2": {
+							"name": "constant.character.escape"
+						}
+					}
+				},
+				{
+					"match": "(?<=^aaa\\s+(auth|acc).*group)\\s+([0-9A-Za-z-_\\+]+)\\s+",
+					"name": "entity.name.class"
+				},
+				{
+					"match": "(?<=^aaa\\s+group\\s+server\\s+tacacs\\+)\\s+([0-9A-Za-z-_\\+]+)\\s+",
+					"name": "entity.name.class"
+				},
+				{
+					"match": "^\\baaa group\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "^\\baaa\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "(^\\btacacs\\s+server\\b)\\s+([0-9A-Za-z-_\\+]+)\\s+",
+					"captures": {
+						"1": {
+							"name": "keyword.control"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
+					}
+				},
+				{
+					"match": "^\\btacacs\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "(\\bserver\\s+name)\\s+([0-9A-Za-z-_\\+]+)\\s+",
+					"captures": {
+						"1": {
+							"name": "variable.other"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
+					}
+				},
+				{
+					"match": "\\b(ip\\s+tacacs\\s+source-interface)\\s+([A-Za-z0-9/]{1,40})?\\b",
+					"captures": {
+						"1": {
+							"name": "variable.other"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
+					}
+				},
+				{
+					"match": "timeout",
+					"name": "variable.other"
 				}
 			]
 		},
@@ -44,9 +142,15 @@
 				{
 					"match": "^(\\bip access-list)\\s+(standard|extended)\\s+(.*)\\b",
 					"captures": {
-						"1": {"name": "constant.character.escape"},
-						"2": {"name": "variable.other"},
-						"3": {"name": "entity.name.class"}
+						"1": {
+							"name": "constant.character.escape"
+						},
+						"2": {
+							"name": "variable.other"
+						},
+						"3": {
+							"name": "entity.name.class"
+						}
 					}
 				},
 				{
@@ -56,8 +160,12 @@
 				{
 					"match": "^(\\baccess-list\\b)\\s+([0-9]{1,4})",
 					"captures": {
-						"1": {"name": "constant.character.escape"},
-						"2": {"name": "entity.name.class"}
+						"1": {
+							"name": "constant.character.escape"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
 					}
 				},
 				{
@@ -67,25 +175,35 @@
 				{
 					"match": "\\b(ip access-(?:class|group))\\s+(.*)\\s+(in|out)\\b",
 					"captures": {
-						"1": {"name": "constant.character.escape"},
-						"2": {"name": "entity.name.class"},
-						"3": {"name": "variable.other"}
+						"1": {
+							"name": "constant.character.escape"
+						},
+						"2": {
+							"name": "entity.name.class"
+						},
+						"3": {
+							"name": "variable.other"
+						}
 					}
 				},
 				{
-					
-				"match": "\\b(access-(?:class|group))\\s+(.*)\\s+(in|out)\\b",
+					"match": "\\b(access-(?:class|group))\\s+(.*)\\s+(in|out)\\b",
 					"captures": {
-						"1": {"name": "constant.character.escape"},
-						"2": {"name": "entity.name.class"},
-						"3": {"name": "variable.other"}
+						"1": {
+							"name": "constant.character.escape"
+						},
+						"2": {
+							"name": "entity.name.class"
+						},
+						"3": {
+							"name": "variable.other"
+						}
 					}
 				},
 				{
 					"match": "\\baccess-(class|group)\\b",
 					"name": "constant.character.escape"
 				},
-
 				{
 					"match": "\\bpermit\\b",
 					"name": "variable.other"
@@ -98,7 +216,6 @@
 					"match": "\\bremark\\b",
 					"name": "constant.numeric"
 				}
-
 			]
 		},
 		"vlans": {
@@ -114,15 +231,23 @@
 				{
 					"match": "(?i)(^line\\s+vty)(\\s+[0-9]{1,2}\\s+[0-9]{1,2})",
 					"captures": {
-						"1": {"name": "keyword.other"},
-						"2": {"name": "entity.name.class"}
+						"1": {
+							"name": "keyword.other"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
 					}
 				},
 				{
 					"match": "(?i)(^line (?:con|aux))\\s+([0-9])",
 					"captures": {
-						"1": {"name": "keyword.other"},
-						"2": {"name": "entity.name.class"}
+						"1": {
+							"name": "keyword.other"
+						},
+						"2": {
+							"name": "entity.name.class"
+						}
 					}
 				},
 				{
@@ -162,7 +287,7 @@
 					"name": "entity.name.class.interfaces.ethernet.cisco-iosxe"
 				},
 				{
-					"match": "\\b(int|interface)\\b",
+					"match": "\\b^(int|interface)\\b",
 					"name": "keyword.other.interfaces.interface.cisco-iosxe"
 				},
 				{
@@ -191,19 +316,30 @@
 				}
 			]
 		},
-		"negate": {
+		"critical": {
 			"patterns": [
 				{
 					"match": "\\s*\\bno\\b",
-					"name": "string.regexp.negate.no.cisco-iosxe"
+					"name": "string.regexp.critical.no.cisco-iosxe"
 				},
 				{
 					"match": "^default",
-					"name": "string.regexp.negate.default.cisco-iosxe"
+					"name": "string.regexp.critical.default.cisco-iosxe"
 				},
 				{
 					"match": "\\b(shut|shutdown)\\b",
-					"name": "string.regexp.negate.default.cisco-iosxe"
+					"name": "string.regexp.critical.default.cisco-iosxe"
+				},
+				{
+					"match": "(key)\\s+(.*)",
+					"captures": {
+						"1": {
+							"name": "string.regexp"
+						},
+						"2": {
+							"name": "constant.character.escape"
+						}
+					}
 				}
 			]
 		},
@@ -212,19 +348,28 @@
 				{
 					"match": "(^router)\\s+(rip|ospf|eigrp|bgp)\\s+([0-9]{1,10})",
 					"captures": {
-						"1": { "name": "keyword.other.router.cisco-iosxe"},
-						"2": { "name": "keyword.other.router.protocol.cisco-iosxe"},
-						"3": { "name": "entity.name.class.router.as.cisco-iosxe"}
+						"1": {
+							"name": "keyword.other.router.cisco-iosxe"
+						},
+						"2": {
+							"name": "keyword.other.router.protocol.cisco-iosxe"
+						},
+						"3": {
+							"name": "entity.name.class.router.as.cisco-iosxe"
+						}
 					}
 				},
 				{
 					"match": "(^router)\\s+(rip|ospf|eigrp|bgp)",
 					"captures": {
-						"1": { "name": "keyword.other.router.cisco-iosxe"},
-						"2": { "name": "keyword.other.router.protocol.cisco-iosxe"}
+						"1": {
+							"name": "keyword.other.router.cisco-iosxe"
+						},
+						"2": {
+							"name": "keyword.other.router.protocol.cisco-iosxe"
+						}
 					}
 				},
-	
 				{
 					"match": "^router",
 					"name": "keyword.other.router.cisco-iosxe"
@@ -233,7 +378,6 @@
 					"match": "passive-interface",
 					"name": "variable.other.router.passive-interface.cisco-iosxe"
 				}
-
 			]
 		},
 		"strings": {
@@ -251,7 +395,7 @@
 			"patterns": [
 				{
 					"name": "comment.line.exclamation.cisco.iosxe",
-					"match":"^\\s*!.*$"
+					"match": "^\\s*!.*$"
 				}
 			]
 		}
