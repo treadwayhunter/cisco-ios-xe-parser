@@ -3,6 +3,9 @@
 	"name": "Cisco IOS-XE",
 	"patterns": [
 		{
+			"include": "#keywords"
+		},
+		{
 			"include": "#strings"
 		},
 		{
@@ -22,9 +25,82 @@
 		},
 		{
 			"include": "#vlans"
+		},
+		{
+			"include": "#accessLists"
 		}
 	],
 	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"match": "\\b(?:(?:25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})\\.){3}(?:25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})\\b",
+					"name": "entity.name.class"
+				}
+			]
+		},
+		"accessLists": {
+			"patterns": [
+				{
+					"match": "^(\\bip access-list)\\s+(standard|extended)\\s+(.*)\\b",
+					"captures": {
+						"1": {"name": "constant.character.escape"},
+						"2": {"name": "variable.other"},
+						"3": {"name": "entity.name.class"}
+					}
+				},
+				{
+					"match": "^\\bip access-list\\b",
+					"name": "constant.character.escape"
+				},
+				{
+					"match": "^(\\baccess-list\\b)\\s+([0-9]{1,4})",
+					"captures": {
+						"1": {"name": "constant.character.escape"},
+						"2": {"name": "entity.name.class"}
+					}
+				},
+				{
+					"match": "^\\baccess-list\\b",
+					"name": "constant.character.escape"
+				},
+				{
+					"match": "\\b(ip access-(?:class|group))\\s+(.*)\\s+(in|out)\\b",
+					"captures": {
+						"1": {"name": "constant.character.escape"},
+						"2": {"name": "entity.name.class"},
+						"3": {"name": "variable.other"}
+					}
+				},
+				{
+					
+				"match": "\\b(access-(?:class|group))\\s+(.*)\\s+(in|out)\\b",
+					"captures": {
+						"1": {"name": "constant.character.escape"},
+						"2": {"name": "entity.name.class"},
+						"3": {"name": "variable.other"}
+					}
+				},
+				{
+					"match": "\\baccess-(class|group)\\b",
+					"name": "constant.character.escape"
+				},
+
+				{
+					"match": "\\bpermit\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\bdeny\\b",
+					"name": "string.regexp"
+				},
+				{
+					"match": "\\bremark\\b",
+					"name": "constant.numeric"
+				}
+
+			]
+		},
 		"vlans": {
 			"patterns": [
 				{
@@ -118,7 +194,7 @@
 		"negate": {
 			"patterns": [
 				{
-					"match": "\\s*no",
+					"match": "\\s*\\bno\\b",
 					"name": "string.regexp.negate.no.cisco-iosxe"
 				},
 				{
@@ -127,7 +203,6 @@
 				},
 				{
 					"match": "\\b(shut|shutdown)\\b",
-
 					"name": "string.regexp.negate.default.cisco-iosxe"
 				}
 			]
