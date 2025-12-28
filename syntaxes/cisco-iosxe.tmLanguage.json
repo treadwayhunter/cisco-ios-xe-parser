@@ -22,9 +22,49 @@
 		},
 		{
 			"include": "#vlans"
+		},
+		{
+			"include": "#accessLists"
 		}
 	],
 	"repository": {
+		"accessLists": {
+			"patterns": [
+				{
+					"match": "^(\\bip access-list)\\s+(standard|extended)\\s+(.*)\\b",
+					"captures": {
+						"1": {"name": "constant.character.escape"},
+						"2": {"name": "variable.other"},
+						"3": {"name": "entity.name.class"}
+					}
+				},
+				{
+					"match": "^\\bip access-list\\b",
+					"name": "constant.character.escape"
+				},
+				{
+				"match": "\\b(access-class)\\s+(.*)\\s+(in|out)\\b",
+					"captures": {
+						"1": {"name": "constant.character.escape"},
+						"2": {"name": "entity.name.class"},
+						"3": {"name": "variable.other"}
+					}
+				},
+				{
+					"match": "\\baccess-class\\b",
+					"name": "constant.character.escape"
+				},
+				{
+					"match": "\\bpermit\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\bdeny\\b",
+					"name": "string.regexp"
+				}
+
+			]
+		},
 		"vlans": {
 			"patterns": [
 				{
@@ -127,7 +167,6 @@
 				},
 				{
 					"match": "\\b(shut|shutdown)\\b",
-
 					"name": "string.regexp.negate.default.cisco-iosxe"
 				}
 			]
