@@ -21,6 +21,9 @@
 			"include": "#interfaces"
 		},
 		{
+			"include":"#spanningTree" 
+		},
+		{
 			"include": "#lines"
 		},
 		{
@@ -42,6 +45,17 @@
 				},
 				{
 					"match": "address\\s+ipv4",
+					"name": "variable.other"
+				},
+				{
+					"match": "(description)\\s+(.*)",
+					"captures": {
+						"1": {"name": "constant.character.escape"},
+						"2": {"name": "string.other"}
+					}
+				},
+				{
+					"match": "\\bip address\\b",
 					"name": "variable.other"
 				}
 			]
@@ -134,6 +148,18 @@
 				{
 					"match": "timeout",
 					"name": "variable.other"
+				},
+				{
+					"match": "\\bauthentication\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "\\bdot1x\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "\\bmab\\b",
+					"name": "keyword.control"
 				}
 			]
 		},
@@ -221,7 +247,7 @@
 		"vlans": {
 			"patterns": [
 				{
-					"match": "vlan",
+					"match": "\\bvlan\\b",
 					"name": "keyword.other.vlans.cisco-iosxe"
 				}
 			]
@@ -259,7 +285,7 @@
 		"interfaces": {
 			"patterns": [
 				{
-					"match": "\\b((?i)(hu|hundredgig|hundredgigabit)\\s*[0-9](?:/[0-9]{1,2})?{1,2}(?:-[0-9]{1,2})?)\\b",
+					"match": "\\b((?i)(hu|hundredgig|hundredgigabit|hundredgigabitethernet)\\s*[0-9](?:/[0-9]{1,2})?{1,2}(?:-[0-9]{1,2})?)\\b",
 					"name": "entity.name.class.interfaces.tengigabitethernet.cisco-iosxe"
 				},
 				{
@@ -303,7 +329,7 @@
 					"name": "variable.other"
 				},
 				{
-					"match": "\\btrunk\\b",
+					"match": "(?<!description.*)\\btrunk\\b",
 					"name": "keyword.control"
 				},
 				{
@@ -313,6 +339,72 @@
 				{
 					"match": "\\baccess-session\\b",
 					"name": "keyword.control"
+				},
+				{
+					"match": "\\bstorm-control\\b",
+					"name": "constant.sha.git-rebase"
+				},
+				{
+					"match": "(?<!-)\\b(?i)(po|port-channel)[0-9]+(\\.[0-9]+)*\\b",
+					"name": "entity.name.class"
+				},
+				{
+					"match": "\\b(channel-group)\\s+([0-9]+)\\b",
+					"captures": {
+						"1": {"name": "variable.other"},
+						"2": {"name": "entity.name.class"}
+					}
+				},
+				{
+					"match": "\\b(?<=channel-group.*)(active|passive)\\b",
+					"name": "keyword.control"
+				},
+				{
+					"match": "\\b(?<=channel-group.*)(?i)(on|auto|desirable)\\b",
+					"name": "string.regexp"
+				},
+				{
+					"match": "\\b(?i)(tun|tunnel)\\s*[0-9]+\\b",
+					"name": "entity.name.class"
+				},
+				{
+					"match": "\\btunnel\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\b(?i)(lo|loopback)[0-9]+\\b",
+					"name": "entity.name.class"
+				},
+				{
+					"match": "\\bip (mtu|tcp)\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\b(?i)vlan[0-9]+\\b",
+					"name": "entity.name.class"
+				},
+				{
+					"match": "\\bencapsulation\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\ip helper-address\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\b(vrf\\s+forwarding)\\s+(.*)",
+					"captures": {
+						"1": {"name": "variable.other"},
+						"2": {"name": "entity.name.class"}
+					}
+				}
+			]
+		},
+		"spanningTree": {
+			"patterns": [
+				{
+					"match": "\\bspanning-tree\\b",
+					"name": "support.function"
 				}
 			]
 		},
@@ -360,6 +452,20 @@
 					}
 				},
 				{
+					"match": "(ip)\\s+(rip|ospf|eigrp|bgp)\\s+([0-9]{1,10})",
+					"captures": {
+						"1": {
+							"name": "keyword.other"
+						},
+						"2": {
+							"name": "keyword.other.router.protocol.cisco-iosxe"
+						},
+						"3": {
+							"name": "entity.name.class.router.as.cisco-iosxe"
+						}
+					}
+				},
+				{
 					"match": "(^router)\\s+(rip|ospf|eigrp|bgp)",
 					"captures": {
 						"1": {
@@ -377,6 +483,14 @@
 				{
 					"match": "passive-interface",
 					"name": "variable.other.router.passive-interface.cisco-iosxe"
+				},
+				{
+					"match": "\\brouter-id\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\bnetwork\\b",
+					"name": "variable.other"
 				}
 			]
 		},
