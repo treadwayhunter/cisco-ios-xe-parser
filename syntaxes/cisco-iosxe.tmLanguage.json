@@ -285,7 +285,7 @@
 		"interfaces": {
 			"patterns": [
 				{
-					"match": "\\b((?i)(hu|hundredgig|hundredgigabit)\\s*[0-9](?:/[0-9]{1,2})?{1,2}(?:-[0-9]{1,2})?)\\b",
+					"match": "\\b((?i)(hu|hundredgig|hundredgigabit|hundredgigabitethernet)\\s*[0-9](?:/[0-9]{1,2})?{1,2}(?:-[0-9]{1,2})?)\\b",
 					"name": "entity.name.class.interfaces.tengigabitethernet.cisco-iosxe"
 				},
 				{
@@ -380,12 +380,23 @@
 					"name": "variable.other"
 				},
 				{
-					"match": "\\bVlan[0-9]+\\b",
+					"match": "\\b(?i)vlan[0-9]+\\b",
 					"name": "entity.name.class"
 				},
 				{
 					"match": "\\bencapsulation\\b",
-					"name": "keyword.control"
+					"name": "variable.other"
+				},
+				{
+					"match": "\\ip helper-address\\b",
+					"name": "variable.other"
+				},
+				{
+					"match": "\\b(vrf\\s+forwarding)\\s+(.*)",
+					"captures": {
+						"1": {"name": "variable.other"},
+						"2": {"name": "entity.name.class"}
+					}
 				}
 			]
 		},
