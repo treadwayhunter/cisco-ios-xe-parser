@@ -50,6 +50,7 @@ archive
  time-period 1440
 !
 !
+! TODO access control or policy enforcement?
 username netadmin privilege 15 secret 9 $9$EXAMPLE_HASH_REDACTED
 username opsuser privilege 5 secret 9 $9$EXAMPLE_HASH_REDACTED
 !

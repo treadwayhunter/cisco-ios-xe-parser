@@ -95,6 +95,13 @@
 					"name": "keyword.control"
 				},
 				{
+					"match": "\\b^(crypto key generate) rsa modulus ([0-9]+)",
+					"captures": {
+						"1": {"name":"keyword.control"},
+						"2": {"name":"entity.name.class"}
+					}
+				},
+				{
 					"match": "\\b(ip domain)\\s+name\\s+(.*)\\b",
 					"captures": {
 						"1": {"name": "keyword.control"},
@@ -463,7 +470,7 @@
 					"name": "string.regexp.critical.default.cisco-iosxe"
 				},
 				{
-					"match": "(?<!crypto\\s+)(key)\\s+(.*)",
+					"match": "(?<!crypto\\s+)(key|secret)\\s+(.*)",
 					"captures": {
 						"1": {
 							"name": "string.regexp"
