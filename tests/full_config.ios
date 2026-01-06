@@ -26,6 +26,7 @@ ip domain name example.local
 ip name-server 10.10.99.10 10.10.99.11
 !
 !
+! TODO should be in routing
 vrf definition MGMT
  rd 65000:99
  address-family ipv4
@@ -110,6 +111,7 @@ ip access-list extended USER_VLAN10_IN
  permit ip any any
 !
 !
+! TODO should go in routing
 ip prefix-list PL-OSPF-FILTER seq 10 permit 10.10.0.0/16 le 32
 ip prefix-list PL-OSPF-FILTER seq 20 permit 172.16.0.0/16 le 32
 !
@@ -269,6 +271,7 @@ ip route vrf MGMT 0.0.0.0 0.0.0.0 10.10.99.1
 ip route 0.0.0.0 0.0.0.0 192.0.2.1
 !
 !
+! TODO Should netflow get its own section?
 ! --- NetFlow (Flexible NetFlow) ---
 flow record NETFLOW-RECORD
  match ipv4 source address
