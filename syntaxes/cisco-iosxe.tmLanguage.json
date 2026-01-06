@@ -63,11 +63,11 @@
 					"name": "keyword.control"
 				},
 				{
-					"match": "\\bservice\\b",
+					"match": "\\b((^service)|(?<=no\\s+)service)\\b",
 					"name": "keyword.control"
 				},
 				{
-					"match": "\\b^hostname",
+					"match": "\\b^hostname\\b",
 					"name": "keyword.control"
 				},
 				{
