@@ -1,11 +1,34 @@
 {
   "name": "cisco-ios-xe",
   "displayName": "Cisco IOS-XE",
-  "description": "Highlights for Cisco IOS-XE configs.",
-  "version": "0.0.1",
+  "description": "Syntax highlights for Cisco IOS-XE configurations.",
+  "version": "0.0.2",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/treadwayhunter/cisco-ios-xe-parser"
+  },
+  "bugs": {
+    "url": "https://github.com/treadwayhunter/cisco-ios-xe-parser/issues"
+  },
+  "homepage": "https://github.com/treadwayhunter/cisco-ios-xe-parser#README",
   "engines": {
     "vscode": "^1.107.0"
   },
+  "keywords": [
+    "cisco",
+    "ios",
+    "ios-xe",
+    "iosxe",
+    "network",
+    "networking",
+    "config",
+    "configs",
+    "configuration",
+    "configurations",
+    "syntax highlighting"
+  ],
   "categories": [
     "Programming Languages"
   ],

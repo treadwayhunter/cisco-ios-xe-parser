@@ -197,7 +197,7 @@
 					}
 				},
 				{
-					"match": "timeout",
+					"match": "\\b(?<!exec-)timeout\\b",
 					"name": "variable.other"
 				},
 				{
